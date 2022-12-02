@@ -1,2 +1,26 @@
-# Project exclude paths
-/target/
+### Spring Boot Log Folder ###
+logs
+
+### Gradle ###
+.gradle
+**/build
+!gradle/wrapper/gradle-wrapper.jar
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+/out/
+
+### Eclipse ###
+.metadata
+bin/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
