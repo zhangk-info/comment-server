@@ -12,8 +12,9 @@
 * CurrentUserFilter token解析并放入CurrentUser
 * PermissionCheckService 自定义权限校验
 * TreeUtil list转树形工具类
-* 
+
 #### 测试类：CommentControllerTest
+
 #### 文档地址： http://localhost:92/doc.html#/home
 
 ### 实现思路 CommentServiceImpl.tree()
