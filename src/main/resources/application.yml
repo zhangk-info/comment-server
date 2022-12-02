@@ -1,0 +1,97 @@
+server:
+  port: 92
+
+spring:
+  application:
+    name: comment-server
+  profiles:
+    active: dev
+
+  main:
+    allow-bean-definition-overriding: true
+  mvc:
+    throw-exception-if-no-handler-found: true
+    jackson:
+      date-format: yyyy-MM-dd HH:mm:ss
+      default-property-inclusion: always #non_null#non_empty
+      time-zone: GMT+8
+    servlet:
+      multipart:
+        max-file-size: 100MB
+        max-request-size: 300MB
+
+  datasource:
+#    url: jdbc:h2:mem:db2;DB_CLOSE_DELAY=-1
+#    username: sa
+#    password: sa
+#    driver-class-name: org.h2.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://43.135.165.79:3306/comment?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: zhangkun..123
+    test-while-idle: true
+    time-between-eviction-runs-millis: 3600000
+    validation-query: SELECT 1
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      pool-name: DatebookHikariCP
+      minimum-idle: 5
+      maximum-pool-size: 15
+      auto-commit: true
+      idle-timeout: 600000
+      connection-test-query: SELECT 1
+      max-lifetime: 1800000
+      connection-timeout: 30000
+  # Flyway 配置
+  flyway:
+    enabled: true
+
+mybatis-plus:
+  global-config:
+    #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+    id-type: 0
+    #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+    field-strategy: 2
+    #驼峰下划线转换
+    db-column-underline: true
+    #刷新mapper 调试神器
+    refresh-mapper: true
+    #数据库大写下划线转换
+    #capital-mode: true
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+  mapper-locations: classpath:/mapper/*/*Mapper.xml
+
+logging:
+  level:
+    org.springframework: DEBUG
+
+
+url:
+  #全局都要放开的路径，不过认证,如：获取token,swagger-ui,静态资源
+  public-ignores:
+    - /*/oauth/token
+    - /oauth/token
+    - /swagger-resources/**
+    - /webjars/**
+    - /swagger-ui.html/**
+    - /doc.html
+  #指定放开的路径，不过认证，如：用户注册，验证码获取，短信验证码获取，自定义路径
+  ignores:
+    - /*/api/v1/sms/ver-code
+    - /api/v1/sms/ver-code
+    - /*/captchas
+    - /*/captchas.jpg
+    - /captchas
+    - /captchas.jpg
+    - /v2/**
+
+knife4j:
+  enable: true
+  cors: true # 开启服务端Cors配置
+  setting:
+    enableOpenApi: false
+    swaggerModelName: 实体类列表
+    enableHost: false
+#    enableHostText: "http://192.168.200.35/api"
