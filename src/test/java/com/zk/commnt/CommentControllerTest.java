@@ -112,6 +112,6 @@ public class CommentControllerTest extends ControllerTest {
         params = new HashMap<>();
         params.putAll(BeanUtil.beanToMap(dto));
         JSONObject dtoResponse = this.execute(RequestTypeEnum.GET, URI + "comments/tree", headers, params);
-        log.info("得到树形结构返回值为：" + dtoResponse.toString());
+        log.info("得到树形结构返回值为：\n\n\n" + dtoResponse.toString()+"\n\n\n");
     }
 }

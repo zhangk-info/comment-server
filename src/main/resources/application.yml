@@ -66,7 +66,7 @@ mybatis-plus:
 logging:
   level:
     root: info
-    org.springframework: DEBUG
+    #org.springframework: DEBUG
 
 
 url:
