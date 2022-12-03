@@ -50,12 +50,12 @@ public class CommentControllerTest extends ControllerTest {
         String token = jsonObject.getStr("access_token");
         // 设置得到的token请求头
         headers.set("Authorization", "Bearer " + token);
-        params.clear();
         // 放入50条评论
         for (int i = 0; i < 50; i++) {
             CommentDTO dto = new CommentDTO();
             dto.setArticleId(1L);
             dto.setContent("第" + i + "条评论");
+            params = new HashMap<>();
             params.putAll(BeanUtil.beanToMap(dto));
             JSONObject dtoResponse = this.execute(RequestTypeEnum.POST, URI + "comments", headers, params);
             Long firstId = dtoResponse.getLong("id");
