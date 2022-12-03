@@ -82,10 +82,8 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         List<Comment> childCommentVos = baseMapper.selectList(childQueryWrapper);
         // 构建返回的树形列表对象并将之前的所有数据放入
         List<CommentVO> returnVos = new ArrayList<>();
-        List<CommentVO> returnVos1 = firstFloorComments.stream().map(this::convertVo).collect(Collectors.toList());
-        List<CommentVO> returnVos2 = childCommentVos.stream().map(this::convertVo).collect(Collectors.toList());
-        returnVos.addAll(returnVos1);
-        returnVos.addAll(returnVos2);
+        returnVos.addAll(firstFloorComments.stream().map(this::convertVo).collect(Collectors.toList()));
+        returnVos.addAll(childCommentVos.stream().map(this::convertVo).collect(Collectors.toList()));
         // 将原数据转为树形结构并设置返回值 TreeUtils.listToTree()
         returnPage.setRecords(TreeUtils.listToTree(returnVos));
         return returnPage;
