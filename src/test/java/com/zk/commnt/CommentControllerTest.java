@@ -87,7 +87,7 @@ public class CommentControllerTest extends ControllerTest {
         dto.setArticleId(1L);
         params = new HashMap<>();
         params.putAll(BeanUtil.beanToMap(dto));
-        JSONObject dtoResponse = this.execute(RequestTypeEnum.POST, URI + "comments/tree", headers, params);
+        JSONObject dtoResponse = this.execute(RequestTypeEnum.GET, URI + "comments/tree", headers, params);
         log.info("得到树形结构返回值为：" + dtoResponse.toString());
     }
 
@@ -111,7 +111,7 @@ public class CommentControllerTest extends ControllerTest {
         dto.setArticleId(1L);
         params = new HashMap<>();
         params.putAll(BeanUtil.beanToMap(dto));
-        JSONObject dtoResponse = this.execute(RequestTypeEnum.POST, URI + "comments/tree", headers, params);
+        JSONObject dtoResponse = this.execute(RequestTypeEnum.GET, URI + "comments/tree", headers, params);
         log.info("得到树形结构返回值为：" + dtoResponse.toString());
     }
 }
