@@ -26,7 +26,7 @@ public class CommentControllerTest extends ControllerTest {
 
     public Long saveComment(Long firstId, Long pid, int i, HttpHeaders headers) throws Exception {
         CommentDTO dto = new CommentDTO();
-        dto.setArticleId(1L);
+        dto.setArticleId(2L);
         dto.setContent("第" + i + "条评论");
         dto.setPid(pid);
         dto.setFirstFloorId(firstId);
@@ -53,7 +53,7 @@ public class CommentControllerTest extends ControllerTest {
         // 放入50条评论
         for (int i = 0; i < 5; i++) {
             CommentDTO dto = new CommentDTO();
-            dto.setArticleId(1L);
+            dto.setArticleId(2L);
             dto.setContent("第" + i + "条评论");
             params = new HashMap<>();
             params.putAll(BeanUtil.beanToMap(dto));
@@ -84,7 +84,7 @@ public class CommentControllerTest extends ControllerTest {
 
         // 得到树形结构返回值
         CommentQuery dto = new CommentQuery();
-        dto.setArticleId(1L);
+        dto.setArticleId(2L);
         params = new HashMap<>();
         params.putAll(BeanUtil.beanToMap(dto));
         JSONObject dtoResponse = this.execute(RequestTypeEnum.GET, URI + "comments/tree", headers, params);
@@ -108,7 +108,7 @@ public class CommentControllerTest extends ControllerTest {
 
         // 得到树形结构返回值
         CommentQuery dto = new CommentQuery();
-        dto.setArticleId(1L);
+        dto.setArticleId(2L);
         params = new HashMap<>();
         params.putAll(BeanUtil.beanToMap(dto));
         JSONObject dtoResponse = this.execute(RequestTypeEnum.GET, URI + "comments/tree", headers, params);
