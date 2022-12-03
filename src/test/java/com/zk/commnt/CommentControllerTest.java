@@ -51,7 +51,7 @@ public class CommentControllerTest extends ControllerTest {
         // 设置得到的token请求头
         headers.set("Authorization", "Bearer " + token);
         // 放入50条评论
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 5; i++) {
             CommentDTO dto = new CommentDTO();
             dto.setArticleId(1L);
             dto.setContent("第" + i + "条评论");
