@@ -63,14 +63,14 @@ public class ControllerTest {
                 break;
         }
         requestBuilder.headers(headers);
-        requestBuilder.contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE);
+        requestBuilder.contentType(MediaType.APPLICATION_JSON_VALUE);
         if (params != null && params.size() > 0) {
             for (Map.Entry<String, String> entry : params.entrySet()) {
                 requestBuilder.param(entry.getKey(), entry.getValue() == null ? "" : entry.getValue());
             }
         }
 
-        requestBuilder.accept(MediaType.APPLICATION_JSON_UTF8_VALUE);
+        requestBuilder.accept(MediaType.APPLICATION_JSON_VALUE);
 
         ResultActions result = mvc.perform(requestBuilder);
 
