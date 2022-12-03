@@ -85,9 +85,33 @@ public class CommentControllerTest extends ControllerTest {
         // 得到树形结构返回值
         CommentQuery dto = new CommentQuery();
         dto.setArticleId(1L);
+        params = new HashMap<>();
         params.putAll(BeanUtil.beanToMap(dto));
         JSONObject dtoResponse = this.execute(RequestTypeEnum.POST, URI + "comments/tree", headers, params);
         log.info("得到树形结构返回值为：" + dtoResponse.toString());
     }
 
+
+    @Test
+    public void testCommentGetAsTree() throws Exception {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "Basic emhhbmdrOnpoYW5nay4uMTIz");
+        Map<String, Object> params = new HashMap<>();
+        params.put("grant_type", "password");
+        params.put("username", "test");
+        params.put("password", "b0db32e2eb00b9644dcf63def75c1ac4");
+
+        JSONObject jsonObject = this.execute(RequestTypeEnum.POST, URI + "oauth/token", headers, params);
+        String token = jsonObject.getStr("access_token");
+        // 设置得到的token请求头
+        headers.set("Authorization", "Bearer " + token);
+
+        // 得到树形结构返回值
+        CommentQuery dto = new CommentQuery();
+        dto.setArticleId(1L);
+        params = new HashMap<>();
+        params.putAll(BeanUtil.beanToMap(dto));
+        JSONObject dtoResponse = this.execute(RequestTypeEnum.POST, URI + "comments/tree", headers, params);
+        log.info("得到树形结构返回值为：" + dtoResponse.toString());
+    }
 }

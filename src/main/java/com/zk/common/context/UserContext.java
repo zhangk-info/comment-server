@@ -42,7 +42,7 @@ public final class UserContext {
     }
 
     public static String getName() {
-        return Objects.isNull(get()) ? null : get().getName();
+        return Objects.isNull(get()) ? "" : get().getName();
     }
 
 //    public static Integer getType() {
