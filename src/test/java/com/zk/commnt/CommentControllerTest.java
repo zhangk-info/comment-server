@@ -33,7 +33,7 @@ public class CommentControllerTest extends ControllerTest {
         Map<String, Object> params = new HashMap<>();
         params.putAll(BeanUtil.beanToMap(dto));
         JSONObject dtoResponse2 = this.execute(RequestTypeEnum.POST, URI + "comments", headers, params);
-        pid = dtoResponse2.getLong("id");
+        pid = dtoResponse2.getJSONObject("data").getLong("id");
         return pid;
     }
 

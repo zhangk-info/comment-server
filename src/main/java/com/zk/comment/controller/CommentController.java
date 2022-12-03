@@ -49,7 +49,7 @@ public class CommentController {
     @GetMapping("tree")
     @ApiOperation(value = "返回评论-树形", notes = "返回评论，每页的全部留言及树形嵌套评论。时间倒序")
     @PermitAll
-    Response<IPage<CommentVO>> tree(@RequestBody CommentQuery commentQuery) {
+    Response<IPage<CommentVO>> tree(CommentQuery commentQuery) {
         if (Objects.isNull(commentQuery.getArticleId())) {
             return Response.failureWithMsg("必须选择评论的文章", ErrorCode.PARAMS_ERR.code);
         }
