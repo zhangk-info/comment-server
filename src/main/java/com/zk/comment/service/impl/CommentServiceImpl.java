@@ -15,6 +15,7 @@ import com.zk.common.util.TreeUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -80,9 +81,11 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
                 .orderByDesc(Comment::getGmtCreate);
         List<Comment> childCommentVos = baseMapper.selectList(childQueryWrapper);
         // 构建返回的树形列表对象并将之前的所有数据放入
-        List<CommentVO> returnVos = Collections.emptyList();
-        returnVos.addAll(firstFloorComments.stream().map(t -> convertVo(t)).collect(Collectors.toList()));
-        returnVos.addAll(childCommentVos.stream().map(t -> convertVo(t)).collect(Collectors.toList()));
+        List<CommentVO> returnVos = new ArrayList<>();
+        List<CommentVO> returnVos1 = firstFloorComments.stream().map(this::convertVo).collect(Collectors.toList());
+        List<CommentVO> returnVos2 = childCommentVos.stream().map(this::convertVo).collect(Collectors.toList());
+        returnVos.addAll(returnVos1);
+        returnVos.addAll(returnVos2);
         // 将原数据转为树形结构并设置返回值 TreeUtils.listToTree()
         returnPage.setRecords(TreeUtils.listToTree(returnVos));
         return returnPage;
