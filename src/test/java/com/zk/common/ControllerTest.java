@@ -23,7 +23,7 @@ import java.util.Map;
  *
  * @version 1.0
  */
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 public class ControllerTest {
     @Autowired

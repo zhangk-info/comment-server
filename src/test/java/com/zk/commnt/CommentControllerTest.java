@@ -58,23 +58,23 @@ public class CommentControllerTest extends ControllerTest {
             params = new HashMap<>();
             params.putAll(BeanUtil.beanToMap(dto));
             JSONObject dtoResponse = this.execute(RequestTypeEnum.POST, URI + "comments", headers, params);
-            Long firstId = dtoResponse.getLong("id");
+            Long firstId = dtoResponse.getJSONObject("data").getLong("id");
             Long pid = firstId;
             // 第2层 2条
             for (int j = 0; j < 2; j++) {
-                pid = saveComment(firstId, pid, j, headers);
+                Long pidj = saveComment(firstId, pid, j, headers);
                 // 第3层 3条
-                for (int k = 0; k < 3; k++) {
-                    pid = saveComment(firstId, pid, k, headers);
+                for (int k = 0; k < 2; k++) {
+                    Long pidk = saveComment(firstId, pidj, k, headers);
                     // 第4层 4条
-                    for (int l = 0; l < 4; l++) {
-                        pid = saveComment(firstId, pid, l, headers);
+                    for (int l = 0; l < 2; l++) {
+                        Long pidl = saveComment(firstId, pidk, l, headers);
                         // 第5层 5条
-                        for (int m = 0; m < 4; m++) {
-                            pid = saveComment(firstId, pid, m, headers);
+                        for (int m = 0; m < 2; m++) {
+                            Long pidm = saveComment(firstId, pidl, m, headers);
                             // 第6层 6条
-                            for (int n = 0; n < 4; n++) {
-                                pid = saveComment(firstId, pid, n, headers);
+                            for (int n = 0; n < 2; n++) {
+                                saveComment(firstId, pidm, n, headers);
                             }
                         }
                     }
