@@ -35,7 +35,7 @@ public class CommentController {
 
     @PostMapping
     @ApiOperation(value = "新增评论", notes = "新增评论")
-    @PreAuthorize("pm.check('test')")
+    @PreAuthorize("@pm.check('test')")
     Response<Comment> save(@RequestBody CommentDTO commentDTO) {
         if (Objects.isNull(commentDTO.getArticleId())) {
             return Response.failureWithMsg("必须选择评论的文章", ErrorCode.PARAMS_ERR.code);

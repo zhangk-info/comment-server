@@ -1,16 +1,12 @@
 package com.zk.common;
 
-import cn.hutool.json.JSON;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import org.junit.Before;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
@@ -18,8 +14,6 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,7 +29,7 @@ public class ControllerTest {
     @Autowired
     protected MockMvc mvc;
 
-    public JSONObject execute(RequestTypeEnum type, String url,HttpHeaders headers,Object obj) throws Exception {
+    public JSONObject execute(RequestTypeEnum type, String url, HttpHeaders headers, Object obj) throws Exception {
         Map<String, String> ps = new HashMap<>();
         if (obj != null) {
             JSONObject jsonObject = JSONUtil.parseObj(JSONUtil.toJsonStr(obj));
@@ -43,7 +37,7 @@ public class ControllerTest {
                 ps.put(key, jsonObject.getStr(key));
             }
         }
-       return execute(type, url, headers,ps);
+        return execute(type, url, headers, ps);
     }
 
     public JSONObject execute(RequestTypeEnum type, String url, HttpHeaders headers, Map<String, String> params) throws Exception {
@@ -70,6 +64,7 @@ public class ControllerTest {
             }
         }
 
+        requestBuilder.content(JSONUtil.toJsonStr(params));
         requestBuilder.accept(MediaType.APPLICATION_JSON_VALUE);
 
         ResultActions result = mvc.perform(requestBuilder);
